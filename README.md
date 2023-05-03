@@ -21,9 +21,9 @@ You will also see any lint errors in the console.
 
 ## Development approach
 
-This application is built using [https://create-react-app.dev/docs/adding-typescript/](Create React App CLI in TypeScript). It uses [https://reactrouter.com/en/main/start/tutorial](React Router v6) to navigate the pages and [https://nivo.rocks/heatmap/](Nivo via heatmap) to visualize data.
+This application is built using [Create React App CLI in TypeScript](http://create-react-app.dev/docs/adding-typescript/). It uses [React Router v6](http://reactrouter.com/en/main/start/tutorial) to navigate the pages and [Nivo via heatmap](http://nivo.rocks/heatmap/) to visualize data.
 
-For the components, [https://react-select.com/home](React Select) is used to easily implement a searchable multiselect dropdown. With the help of [https://getbootstrap.com/docs/5.3/getting-started/introduction/](Bootstrap 5), the custom range slider and tab navigation is implemented. Bootstrap also comes with class helpers to properly layout the pages.
+For the components, [React Select](http://react-select.com/home) is used to easily implement a searchable multiselect dropdown. With the help of [Bootstrap 5](http://getbootstrap.com/docs/5.3/getting-started/introduction/), the custom range slider and tab navigation is implemented. Bootstrap also comes with class helpers to properly layout the pages.
 
 For the color, some of Bootstrap's CSS variables are overridden to avoid adding SASS complexity and easily develop the application. It would be nice to add SASS later on to handle scalable theming and extensive CSS development.
 
