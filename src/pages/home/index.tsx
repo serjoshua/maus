@@ -61,10 +61,10 @@ export default function Home() {
         </div>
         <div className="col-3 text-center my-auto">
           <img
-            src="https://raw.githubusercontent.com/mpi2/EBI02126-web-developer/main/img/embryo_image_1.jpeg"
+            src={process.env.REACT_APP_MAUS_IMG_1}
             className="img-fluid rounded"
             style={{ maxHeight: "17rem" }}
-            alt="embryo"
+            alt="bluish embryo"
           />
         </div>
       </div>
@@ -73,10 +73,10 @@ export default function Home() {
       <div className="row">
         <div className="col-3 text-center my-auto">
           <img
-            src="https://raw.githubusercontent.com/mpi2/EBI02126-web-developer/main/img/embryo_image_2.jpg"
+            src={process.env.REACT_APP_MAUS_IMG_2}
             className="img-fluid rounded"
             style={{ maxHeight: "10rem" }}
-            alt="embryo"
+            alt="pinkish embryo"
           />
         </div>
         <div className="col-9">
@@ -165,10 +165,10 @@ export default function Home() {
         </div>
         <div className="col-3 text-center my-auto">
           <img
-            src="https://raw.githubusercontent.com/mpi2/EBI02126-web-developer/main/img/embryo_image_3.jpeg"
+            src={process.env.REACT_APP_MAUS_IMG_3}
             className="img-fluid rounded"
             style={{ maxHeight: "10rem" }}
-            alt="embryo"
+            alt="brownish embryo with bluish veins"
           />
         </div>
       </div>
