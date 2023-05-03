@@ -1,46 +1,32 @@
-# Getting Started with Create React App
+## IMPC Embryo Data
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+UI for accessing embryo phenotype data
 
-## Available Scripts
+## Running locally
 
+This will require either NPM or Yarn.
 In the project directory, you can run:
 
-### `npm start`
+> `npm install` or `yarn install`
 
-Runs the app in the development mode.\
+Downloads dependencies defined in the project and generates a `node_modules` folder with the installed dependencies.
+
+> `npm start` or `yarn start`
+
+Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
+The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### `npm test`
+## Development approach
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This application is built using [https://create-react-app.dev/docs/adding-typescript/](Create React App CLI in TypeScript). It uses [https://reactrouter.com/en/main/start/tutorial](React Router v6) to navigate the pages and [https://nivo.rocks/heatmap/](Nivo via heatmap) to visualize data.
 
-### `npm run build`
+For the components, [https://react-select.com/home](React Select) is used to easily implement a searchable multiselect dropdown. With the help of [https://getbootstrap.com/docs/5.3/getting-started/introduction/](Bootstrap 5), the custom range slider and tab navigation is implemented. Bootstrap also comes with class helpers to properly layout the pages.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For the color, some of Bootstrap's CSS variables are overridden to avoid adding SASS complexity and easily develop the application. It would be nice to add SASS later on to handle scalable theming and extensive CSS development.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A separate file is created to retrieve data. It uses async-await to handle asynchronous code and React hooks to manage it on the view side. No React middleware framework is used to reduce complexity.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+It took me a day in total to finish the development with a few breaks here and there.
