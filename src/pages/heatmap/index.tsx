@@ -3,29 +3,6 @@ import { useCallback, useEffect, useState } from "react";
 import Select from "react-select";
 import { dataset } from "../../app/api";
 
-interface Gene {
-  marker_accession_id: string;
-  marker_symbol: string;
-  top_level_phenotype_term: {
-    top_level_mp_term_id: string;
-    top_level_mp_term_name: string;
-  };
-  procedures: string[];
-  phenotype_terms: {
-    mp_term_id: string;
-    mp_term_name: string;
-  }[];
-  phenotype_count: number;
-}
-
-interface MapElement {
-  id: string;
-  data: {
-    x: string;
-    y: number;
-  }[];
-}
-
 export default function Heatmap() {
   const [data, setData] = useState<any[]>([]);
   const [tableData, setTableData] = useState<MapElement[]>([]);
@@ -94,8 +71,8 @@ export default function Heatmap() {
           phenos.push(data[i].top_level_phenotype_term.top_level_mp_term_name);
         }
       }
-      setPhenoList(phenos);
-      setMarkerList(markers);
+      setPhenoList(phenos.sort((a, b) => a.localeCompare(b)));
+      setMarkerList(markers.sort((a, b) => a.localeCompare(b)));
     };
 
     fetchData();
@@ -120,115 +97,149 @@ export default function Heatmap() {
   }, [data, markerFilter, phenoFilter, transformData]);
 
   return (
-    <main className="container vh-100">
+    <main className="container d-flex flex-column gap-3">
       <div>
-        <label htmlFor="assocRange" className="form-label">
-          Gene with highest phenotype count
+        <label htmlFor="assocRange" className="form-label fw-bold">
+          Filter top 10% of genes with highest phenotype count
         </label>
-        <input
-          type="range"
-          className="form-range"
-          id="assocRange"
-          min="0"
-          max="0.1"
-          step="0.01"
-          value={assocRange}
-          onChange={(event: React.SyntheticEvent<HTMLInputElement>) => {
-            const markers: string[] = [];
-            for (
-              let i = 0;
-              i <
-              Math.ceil(
-                assocList.length * parseFloat(event.currentTarget.value)
-              );
-              i++
-            ) {
-              markers.push(assocList[i].gene);
-            }
-            setMarkerFilter(markers);
-            setAssocRange(parseFloat(event.currentTarget.value));
+        <div className="d-flex flex-row gap-4">
+          <input
+            type="range"
+            className="form-range"
+            id="assocRange"
+            min="0"
+            max="0.1"
+            step="0.01"
+            value={assocRange}
+            onChange={(event: React.SyntheticEvent<HTMLInputElement>) => {
+              const markers: string[] = [];
+              for (
+                let i = 0;
+                i <
+                Math.ceil(
+                  assocList.length * parseFloat(event.currentTarget.value)
+                );
+                i++
+              ) {
+                markers.push(assocList[i].gene);
+              }
+              setMarkerFilter(markers);
+              setAssocRange(parseFloat(event.currentTarget.value));
+            }}
+          />
+          <span>{Math.floor(assocRange * 100)}%</span>
+        </div>
+      </div>
+      <div>
+        <label className="fw-bold mb-2">Genes</label>
+        <Select
+          options={markerList.map((marker) => {
+            return { value: marker, label: marker };
+          })}
+          isMulti
+          value={markerFilter.map((marker) => {
+            return { value: marker, label: marker };
+          })}
+          closeMenuOnSelect={false}
+          onChange={(selectedOptions) => {
+            setMarkerFilter(
+              selectedOptions.map((selectedOption) => selectedOption.value)
+            );
+            setAssocRange(0);
           }}
         />
       </div>
-      <Select
-        options={markerList.map((marker) => {
-          return { value: marker, label: marker };
-        })}
-        isMulti
-        value={markerFilter.map((marker) => {
-          return { value: marker, label: marker };
-        })}
-        closeMenuOnSelect={false}
-        onChange={(selectedOptions) => {
-          setMarkerFilter(
-            selectedOptions.map((selectedOption) => selectedOption.value)
-          );
-          setAssocRange(0);
-        }}
-      />
-      <Select
-        options={phenoList.map((pheno) => {
-          return { value: pheno, label: pheno };
-        })}
-        isMulti
-        closeMenuOnSelect={false}
-        onChange={(selectedOptions) => {
-          setPhenoFilter(
-            selectedOptions.map((selectedOption) => selectedOption.value)
-          );
-          setAssocRange(0);
-        }}
-      />
-      <ResponsiveHeatMap
-        data={tableData}
-        margin={{ top: 150, right: 90, bottom: 75, left: 90 }}
-        valueFormat=" >-.2d"
-        enableLabels={false}
-        axisTop={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: -45,
-        }}
-        axisRight={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-        }}
-        axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Gene",
-          legendPosition: "middle",
-          legendOffset: -80,
-        }}
-        colors={{
-          type: "sequential",
-          scheme: "orange_red",
-          divergeAt: 0.5,
-          minValue: 0,
-          maxValue: 50,
-        }}
-        emptyColor="#00f"
-        legends={[
-          {
-            anchor: "bottom",
-            translateX: 0,
-            translateY: 40,
-            length: 300,
-            thickness: 7,
-            direction: "row",
-            tickPosition: "after",
-            tickSize: 3,
-            tickSpacing: 3,
-            tickOverlap: false,
-            tickFormat: ">-.2d",
-            title: "Phenotype Count →",
-            titleAlign: "start",
-            titleOffset: 6,
-          },
-        ]}
-      />
+      <div>
+        <label className="fw-bold mb-2">Phenotype system</label>
+        <Select
+          options={phenoList.map((pheno) => {
+            return { value: pheno, label: pheno };
+          })}
+          isMulti
+          closeMenuOnSelect={false}
+          onChange={(selectedOptions) => {
+            setPhenoFilter(
+              selectedOptions.map((selectedOption) => selectedOption.value)
+            );
+            setAssocRange(0);
+          }}
+        />
+      </div>
+      <div className="vh-100">
+        <ResponsiveHeatMap
+          data={tableData}
+          margin={{ top: 150, right: 90, bottom: 75, left: 90 }}
+          valueFormat=" >-.2d"
+          enableLabels={false}
+          axisTop={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: -45,
+          }}
+          axisRight={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+          }}
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Gene",
+            legendPosition: "middle",
+            legendOffset: -80,
+          }}
+          colors={{
+            type: "sequential",
+            scheme: "orange_red",
+            divergeAt: 0.5,
+            minValue: 0,
+            maxValue: 50,
+          }}
+          emptyColor="#000"
+          legends={[
+            {
+              anchor: "bottom",
+              translateX: 0,
+              translateY: 40,
+              length: 300,
+              thickness: 7,
+              direction: "row",
+              tickPosition: "after",
+              tickSize: 3,
+              tickSpacing: 3,
+              tickOverlap: false,
+              tickFormat: ">-.2d",
+              title: "Phenotype Count →",
+              titleAlign: "start",
+              titleOffset: 6,
+            },
+          ]}
+        />
+      </div>
     </main>
   );
+}
+
+interface Gene {
+  marker_accession_id: string;
+  marker_symbol: string;
+  top_level_phenotype_term: {
+    top_level_mp_term_id: string;
+    top_level_mp_term_name: string;
+  };
+  procedures: string[];
+  phenotype_terms: {
+    mp_term_id: string;
+    mp_term_name: string;
+  }[];
+  phenotype_count: number;
+}
+
+interface MapElement {
+  id: string;
+  data: {
+    x: string;
+    y: number;
+  }[];
 }

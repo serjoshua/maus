@@ -7,11 +7,11 @@ export default function Header() {
   return (
     <header className="container">
       <div>
-        <a href={process.env.PUBLIC_URL}>
+        <a href="/">
           <img
             alt="IMPC logo"
             className="img-fluid mx-auto d-block py-4"
-            style={{height: "10rem"}}
+            style={{ height: "10rem" }}
             src={process.env.PUBLIC_URL + "/impc_logo.svg"}
           />
         </a>
