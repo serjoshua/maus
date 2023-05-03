@@ -9,7 +9,7 @@ export default function Home() {
         homozygous mice or less than expected are observed past the weaning
         stage (IMPC&thinsp;
         <a
-          href="https://www.mousephenotype.org/impress/ProcedureInfo?action=list&procID=703&pipeID=7"
+          href={`${process.env.REACT_APP_IMPC_IMPRESS}/ProcedureInfo?action=list&procID=703&pipeID=7`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -19,7 +19,7 @@ export default function Home() {
         birth, during the pre-weaning stage. For this reason, the IMPC
         established a&thinsp;
         <a
-          href="https://www.mousephenotype.org/impress"
+          href={process.env.REACT_APP_IMPC_IMPRESS}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -32,7 +32,7 @@ export default function Home() {
       <p>
         As determined in IMPReSS (see interactive diagram&thinsp;
         <a
-          href="https://www.mousephenotype.org/impress"
+          href={process.env.REACT_APP_IMPC_IMPRESS}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -48,7 +48,7 @@ export default function Home() {
       <p>
         Read more in our paper on&thinsp;
         <a
-          href="https://europepmc.org/article/PMC/5295821"
+          href={process.env.REACT_APP_EPMC_PAPER}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -76,7 +76,7 @@ export default function Home() {
           filtered by a dedicated column, Life Stage (E9.5, E12.5, E15.5 and
           E18.5). Please check the README file or see documentation&thinsp;
           <a
-            href="https://www.mousephenotype.org/help/non-programmatic-data-access/"
+            href={process.env.REACT_APP_IMPC_ACCESS_FTP}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -87,7 +87,7 @@ export default function Home() {
         <li>
           Using the REST API (see documentation&thinsp;
           <a
-            href="https://www.mousephenotype.org/help/programmatic-data-access/"
+            href={process.env.REACT_APP_IMPC_ACCESS_API}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -101,7 +101,7 @@ export default function Home() {
         The IMPC assesses each gene knockout line for viability (Viability
         Primary Screen&thinsp;
         <a
-          href="https://www.mousephenotype.org/impress/ProcedureInfo?action=list&procID=703&pipeID=7"
+          href={`${process.env.REACT_APP_IMPC_IMPRESS}/ProcedureInfo?action=list&procID=703&pipeID=7`}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -117,7 +117,7 @@ export default function Home() {
       <p>
         Lethal strains are further phenotyped in the&thinsp;
         <a
-          href="https://www.mousephenotype.org/impress"
+          href={process.env.REACT_APP_IMPC_IMPRESS}
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -126,7 +126,7 @@ export default function Home() {
         . For embryonic lethal and subviable strains, heterozygotes are
         phenotyped in the IMPC&thinsp;
         <a
-          href="https://www.mousephenotype.org/impress"
+          href={process.env.REACT_APP_IMPC_IMPRESS}
           target="_blank"
           rel="noopener noreferrer"
         >

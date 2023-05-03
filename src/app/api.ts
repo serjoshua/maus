@@ -16,5 +16,5 @@ export async function http<T>(
 }
 
 export async function dataset<TRes>(): Promise<TRes> {
-  return await http<TRes>(`${process.env.REACT_APP_IMPC_DATA}`);
+  return await http<TRes>(`${process.env.REACT_APP_MAUS_DATA}`);
 }
