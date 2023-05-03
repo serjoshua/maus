@@ -17,7 +17,7 @@ export default function Header() {
         </a>
       </div>
       <nav className="mb-4">
-        <ul className="nav nav-underline flex-row justify-content-center">
+        <ul className="nav nav-underline flex-row justify-content-center gap-5">
           <li className="nav-item">
             <Link
               to="/home"

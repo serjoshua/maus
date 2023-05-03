@@ -71,7 +71,7 @@ export default function Heatmap() {
           phenos.push(data[i].top_level_phenotype_term.top_level_mp_term_name);
         }
       }
-      setPhenoList(phenos.sort((a, b) => a.localeCompare(b)));
+      setPhenoList(phenos);
       setMarkerList(markers.sort((a, b) => a.localeCompare(b)));
     };
 
