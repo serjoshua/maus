@@ -10,12 +10,14 @@ export default function Header() {
         <a href={process.env.PUBLIC_URL}>
           <img
             alt="IMPC logo"
+            className="img-fluid mx-auto d-block py-4"
+            style={{height: "10rem"}}
             src={process.env.PUBLIC_URL + "/impc_logo.svg"}
           />
         </a>
       </div>
-      <nav>
-        <ul className="nav nav-underline">
+      <nav className="mb-4">
+        <ul className="nav nav-underline flex-row justify-content-center">
           <li className="nav-item">
             <Link
               to="/home"
